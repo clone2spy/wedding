@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Cưới Đình Lân & Ngọc Trâm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'TH ModernLine', 'Playfair Display', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Hiệu ứng sao rơi */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background: #fff;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: fall linear infinite;
+        }
+        
+        .star:nth-child(1) { left: 10%; animation-duration: 3s; animation-delay: 0s; width: 8px; height: 8px; }
+        .star:nth-child(2) { left: 20%; animation-duration: 2.5s; animation-delay: 0.5s; width: 6px; height: 6px; }
+        .star:nth-child(3) { left: 30%; animation-duration: 4s; animation-delay: 1s; width: 10px; height: 10px; }
+        .star:nth-child(4) { left: 40%; animation-duration: 3.5s; animation-delay: 1.5s; width: 7px; height: 7px; }
+        .star:nth-child(5) { left: 50%; animation-duration: 2.8s; animation-delay: 2s; width: 9px; height: 9px; }
+        .star:nth-child(6) { left: 60%; animation-duration: 3.2s; animation-delay: 0.8s; width: 6px; height: 6px; }
+        .star:nth-child(7) { left: 70%; animation-duration: 4.2s; animation-delay: 2.5s; width: 8px; height: 8px; }
+        .star:nth-child(8) { left: 80%; animation-duration: 2.9s; animation-delay: 1.2s; width: 5px; height: 5px; }
+        .star:nth-child(9) { left: 90%; animation-duration: 3.8s; animation-delay: 0.3s; width: 7px; height: 7px; }
+        .star:nth-child(10) { left: 95%; animation-duration: 3.3s; animation-delay: 1.8s; width: 9px; height: 9px; }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Container chính */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .sparkle-text {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: sparkle 3s ease-in-out infinite;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        /* Main content */
+        .content {
+            flex: 1;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Hero section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .couple-names {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 30px 0;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(255, 154, 158, 0.7)); }
+            to { filter: drop-shadow(0 0 30px rgba(254, 207, 239, 0.9)); }
+        }
+        
+        .wedding-date {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 20px 0;
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .invitation-text {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .heart-decoration {
+            font-size: 3rem;
+            margin: 30px 0;
+            animation: heartbeat 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Grid layout */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        /* Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .glass-card:hover::before {
+            left: 100%;
+        }
+        
+        .card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 25px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+        
+        .info-icon {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Couple section */
+        .couple-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .person-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .person-card:hover {
+            transform: translateY(-15px) scale(1.02);
+        }
+        
+        .person-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef);
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .person-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .person-role {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .person-description {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        /* Contact section */
+        .contact-section {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        
+        .phone-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 30px 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .call-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .call-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+        
+        /* Map container */
+        .map-container {
+            margin: 30px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 300px;
+            border: none;
+            filter: grayscale(20%) contrast(1.2);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sparkle-text {
+                font-size: 2.5rem;
+            }
+            
+            .couple-names {
+                font-size: 2.8rem;
+            }
+            
+            .wedding-date {
+                font-size: 1.4rem;
+            }
+            
+            .invitation-text {
+                font-size: 1.1rem;
+            }
+            
+            .hero-section {
+                padding: 40px 20px;
+            }
+            
+            .glass-card {
+                padding: 30px 20px;
+            }
+            
+            .person-card {
+                padding: 30px 20px;
+            }
+            
+            .contact-section {
+                padding: 40px 20px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .couple-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sparkle-text {
+                font-size: 2rem;
+            }
+            
+            .couple-names {
+                font-size: 2.2rem;
+            }
+            
+            .wedding-date {
+                font-size: 1.2rem;
+            }
+            
+            .hero-section {
+                padding: 30px 15px;
+            }
+            
+            .glass-card {
+                padding: 25px 15px;
+            }
+            
+            .content {
+                padding: 20px 10px;
+            }
+        }
+        
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hiệu ứng sao rơi -->
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <div class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="sparkle-text">Wedding Invitation</h1>
+            <p class="subtitle">Lời Mời Tham Dự Lễ Thành Hôn</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Hero Section -->
+            <section class="hero-section fade-in-up">
+                <div class="heart-decoration">💕</div>
+                <h2 class="couple-names">Đình Lân & Ngọc Trâm</h2>
+                <div class="wedding-date">
+                    <strong>Thứ Bảy, 21 tháng 6 năm 2025</strong><br>
+                    Lúc 11:00 sáng
+                </div>
+                <div class="invitation-text">
+                    Chúng tôi thành kính kính mời Quý khách đến dự Lễ thành hôn của chúng tôi.<br>
+                    Sự hiện diện của Quý khách sẽ là niềm vinh hạnh và là nguồn động viên tinh thần cho chúng tôi trong ngày đặc biệt này.
+                </div>
+                <div class="heart-decoration">💐</div>
+            </section>
+
+            <!-- Info Grid -->
+            <div class="info-grid">
+                <!-- Wedding Info -->
+                <div class="glass-card fade-in-up">
+                    <h3 class="card-title">Thông Tin Tiệc Cưới</h3>
+                    
+                    <div class="info-item">
+                        <span class="info-icon">📅</span>
+                        <div>
+                            <strong>Ngày:</strong> Thứ Bảy, 21/06/2025
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-icon">🕐</span>
+                        <div>
+                            <strong>Giờ:</strong> 11:00 sáng
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-icon">🏠</span>
+                        <div>
+                            <strong>Địa điểm:</strong> Nhà hàng Trọng Hiền
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-icon">📍</span>
+                        <div>
+                            <strong>Địa chỉ:</strong> Số 36 đường Hai Bà Trưng, Thôn 1, thị trấn Sa Thầy, huyện Sa Thầy, tỉnh Kon Tum
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe 
+                            class="map-frame"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241.52498479379037!2d107.79768981655018!3d14.404104164734516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x316bf7c1f100b6c1%3A0x8c42aebb5bd973e8!2zTmjDoCBow6BuZyBUaeG7h2MgY8aw4bubaSBUcuG7jW5nIEhp4buBbg!5e0!3m2!1svi!2s!4v1748543088611!5m2!1svi!2s"
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Couple Introduction -->
+            <section class="glass-card fade-in-up">
+                <h3 class="card-title">Giới Thiệu Cặp Đôi</h3>
+                
+                <div class="couple-grid">
+                    <div class="person-card">
+                        <div class="person-avatar">👰</div>
+                        <h4 class="person-name">Ngọc Trâm</h4>
+                        <p class="person-role">Cô Dâu</p>
+                        <p class="person-description">
+                            Một cô gái xinh đẹp, dịu dàng và tài năng. 
+                            Với nụ cười rạng rỡ và tấm lòng nhân ái, 
+                            cô luôn mang đến niềm vui và hạnh phúc cho mọi người xung quanh.
+                        </p>
+                    </div>
+                    
+                    <div class="person-card">
+                        <div class="person-avatar">🤵</div>
+                        <h4 class="person-name">Đình Lân</h4>
+                        <p class="person-role">Chú Rể</p>
+                        <p class="person-description">
+                            Một chàng trai chững chạc, có trách nhiệm và yêu thương gia đình. 
+                            Với tính cách hòa đồng và lòng nhiệt huyết, 
+                            anh luôn là người bạn đáng tin cậy và người yêu tuyệt vời.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="contact-section fade-in-up">
+                <h3 class="card-title">Liên Hệ</h3>
+                
+                <div style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin: 20px 0;">
+                    Mọi thắc mắc xin liên hệ chú rể:
+                </div>
+                
+                <div class="phone-number">
+                    📞 0389933249
+                </div>
+                
+                <a href="tel:0389933249" class="call-btn">
+                    Gọi Ngay
+                </a>
+                
+                <div style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin-top: 30px;">
+                    Chúng tôi rất mong được đón tiếp Quý khách!
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const elementsToAnimate = document.querySelectorAll('.fade-in-up');
+            
+            elementsToAnimate.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                observer.observe(el);
+            });
+
+            // Add interactive effects
+            const cards = document.querySelectorAll('.glass-card, .person-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = this.style.transform.replace('translateY(-10px)', 'translateY(-15px)') || 'translateY(-15px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = this.style.transform.replace('translateY(-15px)', 'translateY(-10px)') || '';
+                });
+            });
+
+            // Dynamic star generation
+            function createStar() {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.width = star.style.height = (Math.random() * 5 + 5) + 'px';
+                document.querySelector('.stars').appendChild(star);
+
+                setTimeout(() => {
+                    star.remove();
+                }, 5000);
+            }
+
+            // Create stars periodically
+            setInterval(createStar, 300);
+        });
+
+        // Smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
