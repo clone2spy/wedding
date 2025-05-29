@@ -212,16 +212,16 @@
         }
         
         .card-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 25px;
-            text-align: center;
-            background: linear-gradient (45deg, #ff0000, #ffa500) ;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+    background: linear-gradient(45deg, #ff0000, #ffa500); /* đỏ → vàng cam */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: #fff; /* không ảnh hưởng khi có gradient text, nhưng có thể dùng làm fallback */
+}
         
         .info-item {
             display: flex;
